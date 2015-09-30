@@ -55,6 +55,14 @@ MAIN_PAGE_HEAD = '''
             top: 0;
             background-color: white;
         }}
+        .navbar-inverse {{
+            background-image: linear-gradient(to bottom,#3c3c3c 0,blue 100%);
+        }}
+        .navbar-inverse .navbar-brand {{
+            color: ghostwhite;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2.2em;
+        }}
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
