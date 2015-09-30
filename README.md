@@ -1,4 +1,4 @@
-# Movie Time
+## Movie Time
 
 Introduction
 ============
@@ -13,7 +13,7 @@ Requires Python 2.5+
 Installation
 ============
 
-Download zip file here(https://github.com/obelesk411/udacity_movie_project/archive/master.zip).
+Download zip file [here](https://github.com/obelesk411/udacity_movie_project/archive/master.zip).
 Unzip and navigate to directory using console or command prompt.
 
 Usage
