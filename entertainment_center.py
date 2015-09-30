@@ -55,4 +55,4 @@ FURY = media.Movie('Fury',
 
 MOVIES = [THE_GAME, BOYZ_N_THE_HOOD, DAS_BOOT, GANGS_OF_NEW_YORK, GOODFELLAS, FURY]
 
-fresh_tomatoes.open_movies_page(MOVIES)
+fresh_tomatoes.open_movies_page(MOVIES, 'Adam\'s Movie Time')

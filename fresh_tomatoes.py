@@ -4,12 +4,12 @@ import re
 
 
 # Styles and scripting for the page
-main_page_head = '''
+MAIN_PAGE_HEAD = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Fresh Tomatoes!</title>
+    <title>{title}</title>
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -17,37 +17,36 @@ main_page_head = '''
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
-        body {
+        body {{
             padding-top: 80px;
-        }
-        #trailer .modal-dialog {
+        }}
+        #trailer .modal-dialog {{
             margin-top: 200px;
             width: 640px;
             height: 480px;
-        }
-        .hanging-close {
+        }}
+        .hanging-close {{
             position: absolute;
             top: -12px;
             right: -12px;
             z-index: 9001;
-        }
-        #trailer-video {
+        }}
+        #trailer-video {{
             width: 100%;
             height: 100%;
-        }
-        .movie-tile {
+        }}
+        .movie-tile {{
             margin-bottom: 20px;
-            /*padding-top: 20px;*/
-        }
-        .movie-tile:hover {
+        }}
+        .movie-tile:hover {{
             background-color: #EEE;
             cursor: pointer;
-        }
-        .scale-media {
+        }}
+        .scale-media {{
             padding-bottom: 56.25%;
             position: relative;
-        }
-        .scale-media iframe {
+        }}
+        .scale-media iframe {{
             border: none;
             height: 100%;
             position: absolute;
@@ -55,39 +54,39 @@ main_page_head = '''
             left: 0;
             top: 0;
             background-color: white;
-        }
+        }}
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
-        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {{
             // Remove the src so the player itself gets removed, as this is the only
             // reliable way to ensure the video stops playing in IE
             $("#trailer-video-container").empty();
-        });
+        }});
         // Start playing the video whenever the trailer modal is opened
-        $(document).on('click', '.movie-tile', function (event) {
+        $(document).on('click', '.movie-tile', function (event) {{
             var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
             var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
-            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {{
               'id': 'trailer-video',
               'type': 'text-html',
               'src': sourceUrl,
               'frameborder': 0
-            }));
-        });
+            }}));
+        }});
         // Animate in the movies when the page loads
-        $(document).ready(function () {
-          $('.movie-tile').hide().first().show("fast", function showNext() {
+        $(document).ready(function () {{
+          $('.movie-tile').hide().first().show("fast", function showNext() {{
             $(this).next("div").show("fast", showNext);
-          });
-        });
+          }});
+        }});
     </script>
 </head>
 '''
 
 
 # The main page layout and title bar
-main_page_content = '''
+MAIN_PAGE_CONTENT = '''
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
@@ -107,7 +106,7 @@ main_page_content = '''
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="#">{title}</a>
           </div>
         </div>
       </div>
@@ -121,8 +120,8 @@ main_page_content = '''
 
 
 # A single movie entry html template
-movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+MOVIE_TILE_CONTENT = '''
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{{trailer_youtube_id}}" data-toggle="modal" data-target="#trailer">
     <h2>{movie_title}</h2>
     <img src="{poster_image_url}" width="220" height="342">
     <h3>Released in {release_year}</h3>
@@ -143,7 +142,7 @@ def create_movie_tiles_content(movies):
                               else None)
 
         # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
+        content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
             trailer_youtube_id=trailer_youtube_id,
@@ -152,16 +151,19 @@ def create_movie_tiles_content(movies):
     return content
 
 
-def open_movies_page(movies):
+def open_movies_page(movies, title):
     # Create or overwrite the output file
     output_file = open('fresh_tomatoes.html', 'w')
 
+    # Add page title
+    head = MAIN_PAGE_HEAD.format(title=title)
+
     # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
+    rendered_content = MAIN_PAGE_CONTENT.format(title=title,
+                                                movie_tiles=create_movie_tiles_content(movies))
 
     # Output the file
-    output_file.write(main_page_head + rendered_content)
+    output_file.write(head + rendered_content)
     output_file.close()
 
     # open the output file in the browser (in a new tab, if possible)
