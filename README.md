@@ -1,22 +1,18 @@
-## Movie Time
+# Movie Time
 
-Introduction
-============
+## Introduction
 
 This is a standalone website that shows a list of some of my favorite movies.
 
-Requirement
-===========
+## Requirement
 
 Requires Python 2.5+
 
-Installation
-============
+## Installation
 
 Download zip file [here](https://github.com/obelesk411/udacity_movie_project/archive/master.zip).
 Unzip and navigate to directory using console or command prompt.
 
-Usage
-=====
+## Usage
 
     $ python entertainment_center.py
