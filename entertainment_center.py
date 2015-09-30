@@ -16,7 +16,7 @@ BOYZ_N_THE_HOOD = media.Movie('Boys n the Hood',
                               'relationships, violence and future prospects.',
                               'https://upload.wikimedia.org/wikipedia/en/c/c3/Boyz_n_the_hood_' \
                               'poster.jpg',
-                              'https://www.youtube.com/watch?v=J4sKiGkzKJo')
+                              'https://www.youtube.com/watch?v=MVDl7k_xkpo')
 
 DAS_BOOT = media.Movie('Das Boot',
                        'The journey of a German uboat and it\'s crew during World War 2.',
